@@ -24,7 +24,9 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
   end
   watch('app/controllers/sessions_controller.rb') do
     ['test/controllers/sessions_controller_test.rb',
-     'test/integration/users_login_test.rb']
+     'test/integration/users_login_test.rb']def current_user
+  User.find_by(id: session[:user_id])
+end
   end
   watch('app/controllers/account_activations_controller.rb') do
     'test/integration/users_signup_test.rb'
